@@ -27,30 +27,30 @@
     </form>
 
     <?php
-                    if (isset($_POST['login'])) {
-                        session_start();
-                        include("config.php");
+     if (isset($_POST['login'])) {
+       session_start();
+       include("config.php");
 
-                        $email = mysqli_real_escape_string($conn, $_POST['email']);
-                        $password = mysqli_real_escape_string($conn, $_POST['password']);
+       $email = mysqli_real_escape_string($conn, $_POST['email']);
+       $password = mysqli_real_escape_string($conn, $_POST['password']);
 
-                        $sql = "SELECT id, fname, lname, email FROM users WHERE email='$email' AND password='$password'";
-                        $result = mysqli_query($conn, $sql) or die("Query failed");
+       $sql = "SELECT id, fname, lname, email FROM users WHERE email='$email' AND password='$password'";
+       $result = mysqli_query($conn, $sql) or die("Query failed");
 
-                        if (mysqli_num_rows($result) > 0) {
-                            $row = mysqli_fetch_assoc($result);
-                            $_SESSION["fname"] = $row['fname'];
-                            $_SESSION["lname"] = $row['lname'];
-                            $_SESSION["email"] = $row['email'];
-                            $_SESSION["id"] = $row['id'];
+       if (mysqli_num_rows($result) > 0) {
+         $row = mysqli_fetch_assoc($result);
+         $_SESSION["fname"] = $row['fname'];
+         $_SESSION["lname"] = $row['lname'];
+         $_SESSION["email"] = $row['email'];
+         $_SESSION["id"] = $row['id'];
 
-                            header("Location: index.php"); // Make sure $hostname is correctly set
-                            exit;
-                        } else {
-                            echo "<div class='alert alert-danger'>Email and Password do not match</div>";
-                        }
-                    }
-                    ?>
+         header("Location: index.php"); // Make sure $hostname is correctly set
+        exit;
+       } else {
+       echo "<div class='alert alert-danger'>Email and Password do not match</div>";
+       }
+     }
+    ?>
   </div>
 </body>
 </html>
